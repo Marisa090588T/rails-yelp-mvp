@@ -1,0 +1,47 @@
+<h2>Detail of restaurant</h2>
+
+<%= @restaurant.name %>
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <%= @restaurant.address %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= @restaurant.phone_number %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= @restaurant.category %>
+      </td>
+    </tr>  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Top', restaurants_path %> |
+<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+<%= link_to 'Destroy', restaurant_path(@restaurant), method: :delete, data: { confirm: "Are you sure?" } %>
+
+<br>
+<br>
+
+<h4>Reviews</h4>
+  <% @restaurant.reviews.each do |review| %>
+    Rating :<%= review.rating  %>
+    <br>
+    Content : <%= review.content  %>
+    <br>
+    <br>
+  <% end %>
+<br>
+
+<p><strong>Create new review</strong></p>
+<%= simple_form_for [@restaurant, @review] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+  <%= f.submit %>
+<% end %>
